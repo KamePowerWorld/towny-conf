@@ -1,0 +1,24 @@
+  
+database:
+  
+  # Valid load and save types are: flatfile and mysql.
+  database_load: <secret_storetype_here>
+  database_save: <secret_storetype_here>
+  
+  # SQL database connection details (IF set to use mysql).
+  sql:
+    hostname: <secret_hostname_here>
+    port: <secret_port_here>
+    dbname: <secret_dbname_here>
+    table_prefix: <secret_table-prefix_here>
+    username: <secret_username_here>
+    password: <secret_passwd_here>
+    flags: <secret_flags_here>
+  
+    # Modifiable settings to control the connection pooling.
+    # Unless you actually know what you're doing and how Towny uses its mysql connection,
+    # it is strongly recommended you do not change these settings.
+    pooling:
+      max_pool_size: <secret_pool-size_here>
+      max_lifetime: <secret_lifetime_here>
+      connection_timeout: <secret_timeout_here>
