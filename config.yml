@@ -1140,16 +1140,16 @@ protection:
 unclaimed:
   
   # Can players build with any block in the wilderness?
-  unclaimed_zone_build: 'false'
+  unclaimed_zone_build: 'true'
   
   # Can player destroy any block in the wilderness?
-  unclaimed_zone_destroy: 'false'
+  unclaimed_zone_destroy: 'true'
   
   # Can players use items listed in the above protection.item_use_ids in the wilderness without restriction?
-  unclaimed_zone_item_use: 'false'
+  unclaimed_zone_item_use: 'true'
   
   # Can players interact with switch blocks listed in the above protection.switch_ids in the wilderness without restriction?
-  unclaimed_zone_switch: 'false'
+  unclaimed_zone_switch: 'true'
   
   # A list of blocks that will bypass the above settings and do not require the towny.wild.* permission node.
   # These blocks are also used in determining which blocks can be interacted with in Towny Wilds plots in towns.
@@ -1227,14 +1227,14 @@ notification:
   owner_shows_nation_title: 'false'
   
   # When set to false the notifications will appear in the chat rather than the action bar.
-  notifications_appear_in_action_bar: 'true'
+  notifications_appear_in_action_bar: 'false'
   
   # When enabled, notifications will appear on the bossbar instead of in chat or above the action bar.
   # Uses the duration from below for how long the bossbar appears.
-  notifications_appear_on_bossbar: 'false'
+  notifications_appear_on_bossbar: 'true'
   
   # This settings sets the duration the actionbar (The text above the inventory bar) or the bossbar lasts in seconds
-  notification_actionbar_duration: '15'
+  notification_actionbar_duration: '5'
   
   
 ############################################################
