@@ -336,7 +336,7 @@ town:
   # The maximum townblocks available to a town is (numResidents * ratio).
   # Setting this value to 0 will instead use the level based jump values determined in the town level config.
   # Setting this to -1 will result in every town having unlimited claims.
-  town_block_ratio: '8'
+  town_block_ratio: '9'
   
   # The maximimum amount of townblocks a town can have, if town_block_ratio is 0 the max size will be decided by the town_levels.
   # Set to 0 to have no size limit.
