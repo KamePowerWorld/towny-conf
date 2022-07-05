@@ -946,7 +946,7 @@ plugin:
   
   # A blacklist used for validating town/nation names.
   # Names must be seperated by a comma: name1,name2
-  name_blacklist: 'admin,op'
+  name_blacklist: ''
   
   update_notifications:
   
