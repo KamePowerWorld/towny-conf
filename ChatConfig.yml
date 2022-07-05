@@ -114,4 +114,4 @@ modify_chat:
   alone_message_string: No one in range can hear you or you are alone in this channel.
   
 # If true players will see You have joined channel {channel} message on joining the server.
-display_channel_join_message_on_joining_the_server: 'true'
+display_channel_join_message_on_joining_the_server: 'false'
