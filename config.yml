@@ -760,13 +760,13 @@ global_town_settings:
     # inside of town-owned land. This would include mayors, assistants and possibly a builder rank.
     # Players with the towny.claimed.owntown.* permission node (given to mayors/assistants usually,)
     # will also not be limited by this command blacklist.
-    player_owned_plot_limited_commands: sethome,home
+    player_owned_plot_limited_commands: sethome,home,shopkeepers
   
     # This allows the usage of blacklisted commands only in the player's town 
     # and the wilderness (essentially blocking commands from being ran by tourists/visitors)
     # Players with the towny.globally_welcome permission node are not going to be limited by this list.
     # Commands have to be on town_command_blacklisting.town_blacklisted_commands, else this is not going to be checked.
-    own_town_and_wilderness_limited_commands: sethome,home
+    own_town_and_wilderness_limited_commands:
   
   # When enabled, town (and nation) names will automatically be capitalised upon creation.
   automatic_capitalisation: 'false'
@@ -1885,7 +1885,7 @@ bank:
   
   # If true players will only be able to use /t deposit, /t withdraw, /n deposit & /n withdraw while inside bank plots belonging to the town or nation capital respectively.
   # Home plots will also allow deposit and withdraw commands.
-  is_banking_limited_to_bank_plots: 'false'
+  is_banking_limited_to_bank_plots: 'true'
   
   
 ############################################################
