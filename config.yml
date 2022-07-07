@@ -894,7 +894,7 @@ plugin:
     web_map:
   
       # If enabled, players will be prompted to open a url when clicking on coordinates in towny status screens.
-      enabled: 'false'
+      enabled: 'true'
   
       # The url that players will be prompted to open when clicking on a coordinate in a status screen.
       # Valid placeholders are {world}, {x}, and {y}, for the world name, x, and y coordinates respectively.
@@ -1140,16 +1140,16 @@ protection:
 unclaimed:
   
   # Can players build with any block in the wilderness?
-  unclaimed_zone_build: 'true'
+  unclaimed_zone_build: 'false'
   
   # Can player destroy any block in the wilderness?
-  unclaimed_zone_destroy: 'true'
+  unclaimed_zone_destroy: 'false'
   
   # Can players use items listed in the above protection.item_use_ids in the wilderness without restriction?
-  unclaimed_zone_item_use: 'true'
+  unclaimed_zone_item_use: 'false'
   
   # Can players interact with switch blocks listed in the above protection.switch_ids in the wilderness without restriction?
-  unclaimed_zone_switch: 'true'
+  unclaimed_zone_switch: 'false'
   
   # A list of blocks that will bypass the above settings and do not require the towny.wild.* permission node.
   # These blocks are also used in determining which blocks can be interacted with in Towny Wilds plots in towns.
@@ -1197,7 +1197,7 @@ notification:
   
   # If set to true MC's Title and Subtitle feature will be used when crossing into a town.
   # Could be seen as intrusive/distracting, so false by default.
-  using_titles: 'false'
+  using_titles: 'true'
   
   # Requires the above using_titles to be set to true.
   # Title and Subtitle shown when entering a town or the wilderness. By default 1st line is blank, the 2nd line shows {townname} or {wilderness}.
