@@ -93,8 +93,8 @@ tag_formats:
   both: '&f[&6%s&f|&3%s&f] '
   
 colour:
-  king: '&6'
-  mayor: '&b'
+  king: '&f'
+  mayor: '&f'
   resident: '&f'
   nomad: '&f'
   
