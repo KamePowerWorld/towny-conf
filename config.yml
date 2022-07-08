@@ -252,16 +252,16 @@ town:
   default_taxes:
   
     # Default amount of tax of a new town. This must be lower than the economy.daily_taxes.max_town_tax_amount setting.
-    tax: '0.0'
+    tax: '5.0'
   
     # Default amount of shop tax of a new town.
-    shop_tax: '0.0'
+    shop_tax: '5.0'
   
     # Default amount of embassy tax of a new town.
-    embassy_tax: '0.0'
+    embassy_tax: '5.0'
   
     # Default amount for town's plottax costs.
-    plot_tax: '0.0'
+    plot_tax: '5.0'
   
     # Does a player's plot get put up for sale if they are unable to pay the plot tax?
     # When false the plot becomes town land and must be set up for-sale by town mayor or staff.
@@ -272,7 +272,7 @@ town:
   
     # A required minimum tax amount for the default_tax, will not change any towns which already have a tax set.
     # Do not forget to set the default_tax to more than 0 or new towns will still begin with a tax of zero.
-    minimumtax: '0.0'
+    minimumtax: '5.0'
   
   # Limits the maximum amount of bonus blocks a town can buy.
   # This setting does nothing when town.max_purchased_blocks_uses_town_levels is set to true.
@@ -282,7 +282,7 @@ town:
   max_purchased_blocks_uses_town_levels: 'true'
   
   # maximum number of plots any single resident can own
-  max_plots_per_resident: '100'
+  max_plots_per_resident: '128'
   
   # maximum number used in /town claim/unclaim # commands.
   # set to 0 to disable limiting of claim radius value check.
@@ -484,7 +484,7 @@ new_world_settings:
       enabled: 'true'
       # The list of entities whose explosions should be reverted.
       entities: CREEPER,ENDER_CRYSTAL,ENDER_DRAGON,FIREBALL,SMALL_FIREBALL,LARGE_FIREBALL,PRIMED_TNT,MINECART_TNT,WITHER,WITHER_SKULL
-      delay: 20s
+      delay: 10s
   
     # This section is applied to new worlds as default settings when new worlds are detected.
     wild_revert_on_block_explosion:
@@ -794,7 +794,7 @@ global_nation_settings:
   nationzone:
   
     # Nation zone feature is disabled by default. This is because it can cause a higher server load for servers with a large player count.
-    enable: 'false'
+    enable: 'true'
   
     # When set to true, only the capital town of a nation will be surrounded by a nation zone type of wilderness.
     only_capitals: 'true'
@@ -1004,8 +1004,8 @@ filters_colour_chat:
     ranks:
       nomad: '&f'
       resident: '&f'
-      mayor: '&b'
-      king: '&6'
+      mayor: '&f'
+      king: '&f'
   
   # Colour codes used in the RELATIONAL placeholder %rel_townyadvanced_color% to display the relation between two players.
   papi_relational_formatting:
@@ -1234,7 +1234,7 @@ notification:
   notifications_appear_on_bossbar: 'true'
   
   # This settings sets the duration the actionbar (The text above the inventory bar) or the bossbar lasts in seconds
-  notification_actionbar_duration: '5'
+  notification_actionbar_duration: '30'
   
   
 ############################################################
@@ -1472,10 +1472,10 @@ economy:
   new_expand:
   
     # How much it costs to start a nation.
-    price_new_nation: '1000.0'
+    price_new_nation: '10000.0'
   
     # How much it costs to start a town.
-    price_new_town: '250.0'
+    price_new_town: '1000.0'
   
     # The base cost a town has to pay to merge with another town. The town that initiates the merge pays the cost.
     price_town_merge: '0'
@@ -1528,7 +1528,7 @@ economy:
     # If True, only charge death prices for pvp kills. Not monsters/environmental deaths.
     price_death_pvp_only: 'false'
   
-    price_death: '1.0'
+    price_death: '0.0'
   
     price_death_town: '0.0'
   
@@ -1586,13 +1586,13 @@ economy:
     enabled: 'true'
   
     # Maximum tax amount allowed for townblocks sold to players.
-    max_plot_tax_amount: '1000.0'
+    max_plot_tax_amount: '10000.0'
   
     # Maximum tax amount allowed for towns when using flat taxes.
-    max_town_tax_amount: '1000.0'
+    max_town_tax_amount: '10000.0'
   
     # Maximum tax amount allowed for nations when using flat taxes.
-    max_nation_tax_amount: '1000.0'
+    max_nation_tax_amount: '100000.0'
   
     # Maximum tax percentage allowed when taxing by percentages for towns.
     max_town_tax_percent: '25'
@@ -1607,27 +1607,27 @@ economy:
   
     # The server's daily charge on each nation. If a nation fails to pay this upkeep
     # all of it's member town are kicked and the Nation is removed.
-    price_nation_upkeep: '100.0'
+    price_nation_upkeep: '2000.0'
   
     # Uses the total number of plots which a nation has across all of its towns to determine upkeep
     # instead of nation_pertown_upkeep and instead of nation level (number of residents.)
     # Calculated by (price_nation_upkeep X number of plots owned by the nation's towns.)
-    nation_perplot_upkeep: 'false'
+    nation_perplot_upkeep: 'true'
   
     # Uses total number of towns in the nation to determine upkeep instead of nation level (Number of Residents)
     # calculated by (number of towns in nation X price_nation_upkeep).
-    nation_pertown_upkeep: 'false'
+    nation_pertown_upkeep: 'true'
   
     # If set to true, the per-town-upkeep system will be modified by the Nation Levels' upkeep modifiers.
-    nation_pertown_upkeep_affected_by_nation_level_modifier: 'false'
+    nation_pertown_upkeep_affected_by_nation_level_modifier: 'true'
   
     # The server's daily charge on each town. If a town fails to pay this upkeep
     # all of it's residents are kicked and the town is removed.
-    price_town_upkeep: '10.0'
+    price_town_upkeep: '250.0'
   
     # Uses total amount of owned plots to determine upkeep instead of the town level (Number of residents)
     # calculated by (number of claimed plots X price_town_upkeep).
-    town_plotbased_upkeep: 'false'
+    town_plotbased_upkeep: 'true'
   
     # If set to true, the plot-based-upkeep system will be modified by the Town Levels' upkeep modifiers.
     town_plotbased_upkeep_affected_by_town_level_modifier: 'false'
