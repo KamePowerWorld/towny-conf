@@ -308,18 +308,18 @@ town:
   # Put in other words: the buffer area around every claim that no other town can claim into.
   # Does not affect towns which are in the same nation.
   # This will prevent town encasement to a certain degree.
-  min_plot_distance_from_town_plot: '5'
+  min_plot_distance_from_town_plot: '8'
   
   # Minimum number of plots any towns home plot must be from the next town.
   # Put in other words: the buffer area around every homeblock that no other town can claim into.
   # Does not affect towns which are in the same nation.
   # This will prevent someone founding a town right on your doorstep
-  min_distance_from_town_homeblock: '5'
+  min_distance_from_town_homeblock: '8'
   
   # Minimum number of plots an outpost must be from any other town's plots.
   # Useful when min_plot_distance_from_town_plot is set to near-zero to allow towns to have claims
   # near to each other, but want to keep outposts away from towns.
-  min_distance_for_outpost_from_plot: '5'
+  min_distance_for_outpost_from_plot: '8'
   
   # Set to 0 to disable. When above 0 an outpost may only be claimed within the given number of townblocks from a townblock owned by the town.
   # Setting this to any value above 0 will stop outposts being made off-world from the town's homeworld.
@@ -1227,14 +1227,14 @@ notification:
   owner_shows_nation_title: 'false'
   
   # When set to false the notifications will appear in the chat rather than the action bar.
-  notifications_appear_in_action_bar: 'false'
+  notifications_appear_in_action_bar: 'true'
   
   # When enabled, notifications will appear on the bossbar instead of in chat or above the action bar.
   # Uses the duration from below for how long the bossbar appears.
-  notifications_appear_on_bossbar: 'true'
+  notifications_appear_on_bossbar: 'false'
   
   # This settings sets the duration the actionbar (The text above the inventory bar) or the bossbar lasts in seconds
-  notification_actionbar_duration: '30'
+  notification_actionbar_duration: '5'
   
   
 ############################################################
