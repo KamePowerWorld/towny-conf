@@ -1607,7 +1607,7 @@ economy:
   
     # The server's daily charge on each nation. If a nation fails to pay this upkeep
     # all of it's member town are kicked and the Nation is removed.
-    price_nation_upkeep: '2000.0'
+    price_nation_upkeep: '1000.0'
   
     # Uses the total number of plots which a nation has across all of its towns to determine upkeep
     # instead of nation_pertown_upkeep and instead of nation level (number of residents.)
@@ -1623,7 +1623,7 @@ economy:
   
     # The server's daily charge on each town. If a town fails to pay this upkeep
     # all of it's residents are kicked and the town is removed.
-    price_town_upkeep: '250.0'
+    price_town_upkeep: '100.0'
   
     # Uses total amount of owned plots to determine upkeep instead of the town level (Number of residents)
     # calculated by (number of claimed plots X price_town_upkeep).
