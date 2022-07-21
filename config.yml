@@ -1,9 +1,9 @@
   
 version:
   # This is the current version of Towny. Please do not edit.
-  version: 0.98.3.0
+  version: 0.98.3.3
   # This is for showing the changelog on updates. Please do not edit.
-  last_run_version: 0.98.3.0
+  last_run_version: 0.98.3.3
   
 language:
   # The language file you wish to use for your default locale. Your default locale is what
@@ -449,6 +449,14 @@ new_world_settings:
       unclaim_delete: WHITE_BED,ORANGE_BED,MAGENTA_BED,LIGHT_BLUE_BED,YELLOW_BED,LIME_BED,PINK_BED,GRAY_BED,LIGHT_GRAY_BED,CYAN_BED,PURPLE_BED,BLUE_BED,BROWN_BED,GREEN_BED,RED_BED,BLACK_BED,TORCH,REDSTONE_WIRE,ACACIA_SIGN,BIRCH_SIGN,DARK_OAK_SIGN,JUNGLE_SIGN,OAK_SIGN,SPRUCE_SIGN,WOODEN_DOOR,ACACIA_WALL_SIGN,BIRCH_WALL_SIGN,DARK_OAK_WALL_SIGN,JUNGLE_WALL_SIGN,OAK_WALL_SIGN,SPRUCE_WALL_SIGN,STONE_PLATE,IRON_DOOR_BLOCK,WOOD_PLATE,REDSTONE_TORCH_OFF,REDSTONE_TORCH_ON,DIODE_BLOCK_OFF,DIODE_BLOCK_ON,CRIMSON_SIGN,WARPED_SIGN,CRIMSON_WALL_SIGN,WARPED_WALL_SIGN,CRIMSON_DOOR,WARPED_DOOR,SOUL_TORCH,SOUL_WALL_TORCH,CRIMSON_PRESSURE_PLATE,WARPED_PRESSURE_PLATE,POLISHED_BLACKSTONE_PRESSURE_PLATE
   
     # This section is applied to new worlds as default settings when new worlds are detected.
+    entity_delete:
+      enabled: 'false'
+  
+      # These entities will be deleted upon a plot being unclaimed.
+      # Valid EntityTypes can be found here: https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/entity/EntityType.html
+      unclaim_delete: ENDER_CRYSTAL
+  
+    # This section is applied to new worlds as default settings when new worlds are detected.
     mayor_plotblock_delete:
       enabled: 'true'
   
@@ -859,7 +867,7 @@ plugin:
   database:
   
     # Flatfile backup settings.
-    daily_backups: 'true'
+    daily_backups: 'false'
     backups_are_deleted_after: 30d
   
     # Valid entries are: tar, tar.gz, zip, or none for no backup.
@@ -936,7 +944,7 @@ plugin:
     dev_name: ElgarL
   
   # If true this will cause the log to be wiped at every startup.
-  reset_log_on_boot: 'true'
+  reset_log_on_boot: 'false'
   
   # Sets the default size that /towny top commands display.
   towny_top_size: '10'
@@ -1049,7 +1057,7 @@ protection:
   #       to protect HORSES, DONKEYS, MULES, PIGS, STRIDERS (This is not recommended, unless you want players to not be able to
   #       re-mount their animals in towns they cannot switch in.)
   # A full list of proper names can be found here https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html 
-  switch_ids: CHEST,SHULKER_BOXES,TRAPPED_CHEST,FURNACE,BLAST_FURNACE,DISPENSER,HOPPER,DROPPER,JUKEBOX,SMOKER,COMPOSTER,BELL,BARREL,BREWING_STAND,LEVER,PRESSURE_PLATES,BUTTONS,WOOD_DOORS,FENCE_GATES,TRAPDOORS,MINECARTS,LODESTONE,RESPAWN_ANCHOR,TARGET
+  switch_ids: CHEST,SHULKER_BOXES,TRAPPED_CHEST,FURNACE,BLAST_FURNACE,DISPENSER,HOPPER,DROPPER,JUKEBOX,SMOKER,COMPOSTER,BELL,BARREL,BREWING_STAND,LEVER,PRESSURE_PLATES,BUTTONS,WOOD_DOORS,FENCE_GATES,TRAPDOORS,MINECARTS,LODESTONE,RESPAWN_ANCHOR,TARGET,OAK_CHEST_BOAT
   
   # Materials which can be lit on fire even when firespread is disabled.
   # Still requires the use of the flint and steel.
@@ -1226,12 +1234,10 @@ notification:
   # Titles are the ones granted by nation kings.
   owner_shows_nation_title: 'false'
   
-  # When set to false the notifications will appear in the chat rather than the action bar.
-  notifications_appear_in_action_bar: 'true'
-  
-  # When enabled, notifications will appear on the bossbar instead of in chat or above the action bar.
-  # Uses the duration from below for how long the bossbar appears.
-  notifications_appear_on_bossbar: 'false'
+  # This setting controls where chunk notifications are displayed for players.
+  # By default, notifications appear in the player's action bar.
+  # Available options: action_bar, chat, bossbar, or none.
+  notifications_appear_as: action_bar
   
   # This settings sets the duration the actionbar (The text above the inventory bar) or the bossbar lasts in seconds
   notification_actionbar_duration: '5'
@@ -1603,7 +1609,7 @@ economy:
     # When true, a nation's capital will pay the nation tax from the capital's town bank.
     # This feature is a bit redundant because the king can withdraw from both banks anyways,
     # but it might keep nation's from being deleted for not paying their upkeep.
-    do_nation_capitals_pay_nation_tax: 'false'
+    do_nation_capitals_pay_nation_tax: 'true'
   
     # The server's daily charge on each nation. If a nation fails to pay this upkeep
     # all of it's member town are kicked and the Nation is removed.
@@ -1612,11 +1618,11 @@ economy:
     # Uses the total number of plots which a nation has across all of its towns to determine upkeep
     # instead of nation_pertown_upkeep and instead of nation level (number of residents.)
     # Calculated by (price_nation_upkeep X number of plots owned by the nation's towns.)
-    nation_perplot_upkeep: 'true'
+    nation_perplot_upkeep: 'false'
   
     # Uses total number of towns in the nation to determine upkeep instead of nation level (Number of Residents)
     # calculated by (number of towns in nation X price_nation_upkeep).
-    nation_pertown_upkeep: 'true'
+    nation_pertown_upkeep: 'false'
   
     # If set to true, the per-town-upkeep system will be modified by the Nation Levels' upkeep modifiers.
     nation_pertown_upkeep_affected_by_nation_level_modifier: 'true'
@@ -1627,10 +1633,10 @@ economy:
   
     # Uses total amount of owned plots to determine upkeep instead of the town level (Number of residents)
     # calculated by (number of claimed plots X price_town_upkeep).
-    town_plotbased_upkeep: 'true'
+    town_plotbased_upkeep: 'false'
   
     # If set to true, the plot-based-upkeep system will be modified by the Town Levels' upkeep modifiers.
-    town_plotbased_upkeep_affected_by_town_level_modifier: 'false'
+    town_plotbased_upkeep_affected_by_town_level_modifier: 'true'
   
     # If set to any amount over zero, if a town's plot-based upkeep totals less than this value, the town will pay the minimum instead.
     town_plotbased_upkeep_minimum_amount: '0.0'
@@ -1643,12 +1649,12 @@ economy:
   
     # Uses total number of plots that the town is overclaimed by, to determine the price_town_overclaimed_upkeep_penalty cost.
     # If set to true the penalty is calculated (# of plots overclaimed X price_town_overclaimed_upkeep_penalty).
-    price_town_overclaimed_upkeep_penalty_plotbased: 'false'
+    price_town_overclaimed_upkeep_penalty_plotbased: 'true'
   
     # If enabled and you set a negative upkeep for the town
     # any funds the town gains via upkeep at a new day
     # will be shared out between the plot owners.
-    use_plot_payments: 'false'
+    use_plot_payments: 'true'
   
   # The Bankruptcy system in Towny will make it so that when a town cannot pay their upkeep costs,
   # rather than being deleted the towns will go into debt. Debt is capped based on the Town's costs
@@ -1688,6 +1694,11 @@ economy:
       # If a town has reached their debt cap and is unable to pay the upkeep with debt,
       # will Towny delete them?
       delete_towns_that_reach_debt_cap: 'false'
+  
+    neutrality:
+  
+      # If a town is bankrupt can they still pay for neutrality?
+      can_bankrupt_towns_pay_for_neutrality: 'true'
   
     nation_tax:
   
