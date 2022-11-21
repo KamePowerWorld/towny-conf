@@ -1,7 +1,7 @@
   
 version:
   # This is the current version of Towny.  Please do not edit.
-  version: '0.96'
+  version: '0.98'
   # This is for showing the changelog on updates.  Please do not edit.
   last_run_version: '0.96'
   
@@ -74,7 +74,7 @@ chatconfigcomments: ''
 channel_formats:
   # This is the format which will be used for GLOBAL chat/channels.
   # This is also the format used when you have modify_chat.enable: true, but use other plugins to handle chat.
-  global: '{channelTag} {permuserprefix}{permusersuffix}{playername}: {msg}'
+  global: '{channelTag} {townytagoverride}{permuserprefix}{permusersuffix}{playername}: {msg}'
   # TOWN channel types.
   town: '{channelTag} {permuserprefix}{permusersuffix}{playername}: {msg}'
   # NATION channel types.

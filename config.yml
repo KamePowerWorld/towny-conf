@@ -1,9 +1,9 @@
   
 version:
   # This is the current version of Towny. Please do not edit.
-  version: 0.98.3.3
+  version: 0.98.4.0
   # This is for showing the changelog on updates. Please do not edit.
-  last_run_version: 0.98.3.3
+  last_run_version: 0.98.4.0
   
 language:
   # The language file you wish to use for your default locale. Your default locale is what
@@ -68,6 +68,7 @@ levels:
     townBlockLimit: 1
     upkeepModifier: 1.0
     townOutpostLimit: 0
+    townBlockTypeLimits: {}
   - numResidents: 1
     debtCapModifier: 1.0
     namePostfix: ' (Settlement)'
@@ -78,6 +79,7 @@ levels:
     townBlockLimit: 16
     upkeepModifier: 1.0
     townOutpostLimit: 0
+    townBlockTypeLimits: {}
   - numResidents: 2
     debtCapModifier: 1.0
     namePostfix: ' (Hamlet)'
@@ -88,6 +90,7 @@ levels:
     townBlockLimit: 32
     upkeepModifier: 1.0
     townOutpostLimit: 1
+    townBlockTypeLimits: {}
   - numResidents: 6
     debtCapModifier: 1.0
     namePostfix: ' (Village)'
@@ -98,6 +101,7 @@ levels:
     townBlockLimit: 96
     upkeepModifier: 1.0
     townOutpostLimit: 1
+    townBlockTypeLimits: {}
   - numResidents: 10
     debtCapModifier: 1.0
     namePostfix: ' (Town)'
@@ -108,6 +112,7 @@ levels:
     townBlockLimit: 160
     upkeepModifier: 1.0
     townOutpostLimit: 2
+    townBlockTypeLimits: {}
   - numResidents: 14
     debtCapModifier: 1.0
     namePostfix: ' (Large Town)'
@@ -118,6 +123,7 @@ levels:
     townBlockLimit: 224
     upkeepModifier: 1.0
     townOutpostLimit: 2
+    townBlockTypeLimits: {}
   - numResidents: 20
     debtCapModifier: 1.0
     namePostfix: ' (City)'
@@ -128,6 +134,7 @@ levels:
     townBlockLimit: 320
     upkeepModifier: 1.0
     townOutpostLimit: 3
+    townBlockTypeLimits: {}
   - numResidents: 24
     debtCapModifier: 1.0
     namePostfix: ' (Large City)'
@@ -138,6 +145,7 @@ levels:
     townBlockLimit: 384
     upkeepModifier: 1.0
     townOutpostLimit: 3
+    townBlockTypeLimits: {}
   - numResidents: 28
     debtCapModifier: 1.0
     namePostfix: ' (Metropolis)'
@@ -148,6 +156,7 @@ levels:
     townBlockLimit: 448
     upkeepModifier: 1.0
     townOutpostLimit: 4
+    townBlockTypeLimits: {}
   
   # Guide On How to Configure: https://github.com/TownyAdvanced/Towny/wiki/How-Towny-Works#configuring-town_level-and-nation_level
   nation_level:
@@ -246,7 +255,7 @@ town:
   default_board: /town set board [msg]
   
   # Setting this to true will set a town's tag automatically using the first four characters of the town's name.
-  set_tag_automatically: 'false'
+  set_tag_automatically: 'true'
   
   # Default tax settings for new towns.
   default_taxes:
@@ -272,7 +281,7 @@ town:
   
     # A required minimum tax amount for the default_tax, will not change any towns which already have a tax set.
     # Do not forget to set the default_tax to more than 0 or new towns will still begin with a tax of zero.
-    minimumtax: '5.0'
+    minimumtax: '0.0'
   
   # Limits the maximum amount of bonus blocks a town can buy.
   # This setting does nothing when town.max_purchased_blocks_uses_town_levels is set to true.
@@ -370,6 +379,19 @@ nation:
   # Setting this to true will set a nation's tag automatically using the first four characters of the nation's name.
   set_tag_automatically: 'false'
   
+  # Default tax settings for new nations.
+  default_taxes:
+  
+    # Default amount of tax of a new nation. This must be lower than the economy.daily_taxes.max_nation_tax_amount setting.
+    tax: '0.0'
+  
+    # Default status of new nation's taxpercentage. True means that the default_tax is treated as a percentage instead of a fixed amount.
+    taxpercentage: 'false'
+  
+    # A required minimum tax amount for the default_tax, will not change any nations which already have a tax set.
+    # Do not forget to set the default_tax to more than 0 or new nations will still begin with a tax of zero.
+    minimumtax: '0.0'
+  
   
 ############################################################
 # +------------------------------------------------------+ #
@@ -388,6 +410,10 @@ nation:
 new_world_settings:
   # Do new worlds have Towny enabled by default?
   using_towny: 'true'
+  
+  # Are new worlds claimable by default?
+  # Setting this to false means that Towny will still be active but no land can be claimed by towns.
+  are_new_world_claimable: 'true'
   
   pvp:
     # Do new worlds have pvp enabled by default?
@@ -573,8 +599,22 @@ global_town_settings:
   # When set to true, if players are damaged in any way while in a spawn warmup, their spawning will be cancelled.
   damage_cancels_spawn_warmup: 'false'
   
-  # Number of seconds that must pass before a player can use /t spawn or /res spawn.
-  spawn_cooldown_time: '30'
+  spawning_cooldowns:
+  
+    # Number of seconds that must pass before a player can use /t spawn or /res spawn.
+    town_spawn_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player can use /t outpost.
+    outpost_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player of the same nation can use /t spawn.
+    nation_member_town_spawn_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player in an allied nation can use /t spawn.
+    nation_ally_town_spawn_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player who is not a member or ally of town can use /t spawn.
+    unaffiliated_town_spawn_cooldown_time: '30'
   
   # Decides whether confirmations should appear if you spawn to an area with an associated cost.
   spawn_warnings: 'true'
@@ -779,9 +819,16 @@ global_town_settings:
   # When enabled, town (and nation) names will automatically be capitalised upon creation.
   automatic_capitalisation: 'false'
   
+  # When disabled, towns will not be able to be created with or renamed to a name that contains numbers.
+  # Disabling this option does not affect already created towns.
+  allow_numbers_in_town_name: 'true'
+  
   # This setting determines the list of allowed town map colors.
   # The color codes are in hex format.
   allowed_map_colors: aqua:00ffff, azure:f0ffff, beige:f5f5dc, black:000000, blue:0000ff, brown:a52a2a, cyan:00ffff, darkblue:00008b, darkcyan:008b8b, darkgrey:a9a9a9, darkgreen:006400, darkkhaki:bdb76b, darkmagenta:8b008b, darkolivegreen:556b2f, darkorange:ff8c00, darkorchid:9932cc, darkred:8b0000, darksalmon:e9967a, darkviolet:9400d3, fuchsia:ff00ff, gold:ffd700, green:008000, indigo:4b0082, khaki:f0e68c, lightblue:add8e6, lightcyan:e0ffff, lightgreen:90ee90, lightgrey:d3d3d3, lightpink:ffb6c1, lightyellow:ffffe0, lime:00ff00, magenta:ff00ff, maroon:800000, navy:000080, olive:808000, orange:ffa500, pink:ffc0cb, purple:800080, violet:800080, red:ff0000, silver:c0c0c0, white:ffffff, yellow:ffff00
+  
+  # List of ranks (separated by a comma) that will prevent a player from being kicked from a town.
+  unkickable_ranks: assistant
   
   
 ############################################################
@@ -844,9 +891,24 @@ global_nation_settings:
   # when there is a war or peace.
   allow_nation_spawn_travel_ally: 'true'
   
+  spawning_cooldowns:
+  
+    # Number of seconds that must pass before a player of the same nation can use /n spawn.
+    nation_member_nation_spawn_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player allied with the nation can use /n spawn.
+    nation_ally_nation_spawn_cooldown_time: '30'
+  
+    # Number of seconds that must pass before a player who is not a member or ally can use /n spawn.
+    unaffiliated_nation_spawn_cooldown_time: '30'
+  
   # If higher than 0, it will limit how many towns can be joined into a nation.
   # Does not affect existing nations that are already over the limit.
   max_towns_per_nation: '0'
+  
+  # If higher than 0, it will limit how many residents can join a nation.
+  # Does not affect existing nations that are already over the limit.
+  max_residents_per_nation: '0'
   
   # This setting determines the list of allowed nation map colors.
   # The color codes are in hex format.
@@ -854,6 +916,10 @@ global_nation_settings:
   
   # The maximum amount of allies that a nation can have, set to -1 to have no limit.
   max_allies: '-1'
+  
+  # When disabled, nations will not be able to be created with or renamed to a name that contains numbers.
+  # Disabling this option does not affect already created nations.
+  allow_numbers_in_nation_name: 'true'
   
   
 ############################################################
@@ -918,6 +984,9 @@ plugin:
     # Only used when less than day_interval. Default is 12h (midday).
     # If day_interval is set to something like 20m, the new_day_time is not used, day_interval will be used instead.
     new_day_time: 12h
+  
+    # If enabled (disabled by default), a Java Timer will be used for scheduling new days, which is more accurate than Towny's Bukkit timer task but uses an extra thread.
+    uses_java_timer: 'false'
   
     # Whether towns with no claimed townblocks should be deleted when the new day is run.
     delete_0_plot_towns: 'false'
@@ -1020,6 +1089,9 @@ filters_colour_chat:
     # Used when two players have no special relationship.
     none: '&f'
   
+    # Given to players who have no town.
+    no_town: '&f'
+  
     # Used when two players are in the same town.
     same_town: '&2'
   
@@ -1119,11 +1191,6 @@ protection:
   # have to be able to break the crop by hand in order to be able to trample crops.
   prevent_player_crop_trample: 'true'
   
-  # When set to true, sculk will not spread into areas which have mobs disabled.
-  # This uses the wildernessmobs world setting when in the Towny wilderness.
-  # This setting is not used if your spigot is up to date. (They fixed the API after June 19, 2022.)
-  prevent_sculk_spread_in_mobs_off_locations: 'true'
-  
   
 ############################################################
 # +------------------------------------------------------+ #
@@ -1215,6 +1282,11 @@ notification:
   # {town_motd} - Shows the townboard message.
   # {town_residents} - Shows the number of residents in the town.
   # {town_residents_online} - Shows the number of residents online currently.
+  # {nationname} - Name of the nation, formatted below,
+  # {nationcapital} - Name of the nation capital and nation, formatted below,
+  # {nation_motd} - Shows the nationboard message.
+  # {nation_residents} - Shows the number of residents in the nation.
+  # {nation_residents_online} - Shows the number of residents online currently.
   # The notification.town_names_are_verbose setting will affect the {townname} placeholder.
   titles:
   
@@ -1229,6 +1301,13 @@ notification:
   
     # Entering Wilderness Lower Subtitle line.
     wilderness_subtitle: '&2{wilderness}'
+  
+    # The format used to format the {nationame} option. The name of the nation will replace %s.
+    nationname_format: '&6Nation of %s'
+  
+    # The format used to format the {nationcapital} option. The name of the capital city and nation will replace the %s and %s.
+    # Alternatively, you can use %t for townname and %n for nationname and show either one or both.
+    nationcapital_format: '&6Entering %s, Capital City of %s'
   
   # If the notification.owner option should show name or {title} name.
   # Titles are the ones granted by nation kings.
@@ -1606,6 +1685,12 @@ economy:
     # The maximum amount of money that can be taken from a balance when using a percent tax, this is the default for all new towns.
     max_town_tax_percent_amount: '10000'
   
+    # Maximum tax percentage allowed when taxing by percentages for nations.
+    max_nation_tax_percent: '25'
+  
+    # The maximum amount of money that can be taken from a balance when using a percent tax, this is the default for all new nations.
+    max_nation_tax_percent_amount: '10000'
+  
     # When true, a nation's capital will pay the nation tax from the capital's town bank.
     # This feature is a bit redundant because the king can withdraw from both banks anyways,
     # but it might keep nation's from being deleted for not paying their upkeep.
@@ -1655,6 +1740,11 @@ economy:
     # any funds the town gains via upkeep at a new day
     # will be shared out between the plot owners.
     use_plot_payments: 'true'
+  
+    # If enabled, if a plot tax is set to a negative amount
+    # it will result in the resident that owns it being paid
+    # by the town bank (if the town can afford it.)
+    allow_negative_plot_tax: 'false'
   
   # The Bankruptcy system in Towny will make it so that when a town cannot pay their upkeep costs,
   # rather than being deleted the towns will go into debt. Debt is capped based on the Town's costs
@@ -1840,36 +1930,63 @@ townblocktypes:
   
 jail:
   
-  #If true attacking players who die on enemy-town land will be placed into the defending town's jail if it exists.
-  #Requires town_respawn to be true in order to work.
+  # If true attacking players who die on enemy-town land will be placed into the defending town's jail if it exists.
+  # Requires town_respawn to be true in order to work.
   is_jailing_attacking_enemies: 'false'
   
-  #If true attacking players who are considered an outlaw, that are killed inside town land will be placed into the defending town's jail if it exists.
-  #Requires town_respawn to be true in order to work.
+  # If true attacking players who are considered an outlaw, that are killed inside town land will be placed into the defending town's jail if it exists.
+  # Requires town_respawn to be true in order to work.
   is_jailing_attacking_outlaws: 'false'
   
-  #How many hours an attacking outlaw will be jailed for.
+  # How many hours an attacking outlaw will be jailed for.
   outlaw_jail_hours: '5'
   
-  #If true jailed players can use items that teleport, ie: Ender Pearls & Chorus Fruit, but are still barred from using other methods of teleporting.
+  # How many hours an attacking enemy will be jailed for.
+  pow_jail_hours: '5'
+  
+  # The maximum hours that a mayor can set when jailing someone, full number expected.
+  maximum_jail_hours: '5'
+  
+  # Amount that it costs per player jailed for a town, this is withdrawn from the Town bank. Set to -1 to disable.
+  fee_initial_amount: '-1'
+  
+  # Amount that it costs per player jailed per hour for a town, this is withdrawn from the Town bank. Set to -1 to disable.
+  fee_hourly_amount: '-1'
+  
+  # If true jailed players can use items that teleport, ie: Ender Pearls & Chorus Fruit, but are still barred from using other methods of teleporting.
   jail_allows_teleport_items: 'false'
   
-  #If false jailed players can use /town leave, and escape a jail.
+  # If false jailed players can use /town leave, and escape a jail.
   jail_denies_town_leave: 'false'
   
   bail:
   
-    #If true players can pay a bail amount to be unjailed.
+    # If true players can pay a bail amount to be unjailed.
     is_allowing_bail: 'false'
   
-    #Amount that bail costs for normal residents/nomads.
+    # Amount that bail costs for outlaw or POW arrests.
     bail_amount: '10'
   
-    #Amount that bail costs for Town mayors.
+    # Max bail cost that a mayor can set.
+    bailmax_amount: '100'
+  
+    # Amount that bail costs for Town mayors if captured.
     bail_amount_mayor: '10'
   
-    #Amount that bail costs for Nation kings.
+    # Amount that bail costs for Nation kings if captured.
     bail_amount_king: '10'
+  
+  # Amount of potential jailed players per town, set to -1 to disable.
+  max_jailed_count: '-1'
+  
+  # Behaviour for new jail attempts if max jailed count is reached
+  # 0 = Unable to jail new players until a current prisoner is released.
+  # 1 = A prisoner slot will be made by automatically releasing a prisoner based on lowest remaining time.
+  # 2 = A prisoner slot will be made by automatically releasing a prisoner based on lowest custom bail.
+  max_jailed_newjail_behavior: '0'
+  
+  # If false players will not be provided with a book upon being jailed.
+  is_jailbook_enabled: 'true'
   
   # Commands which a jailed player cannot use.
   blacklisted_commands: home,spawn,teleport,tp,tpa,tphere,tpahere,back,dback,ptp,jump,kill,warp,suicide
@@ -1935,3 +2052,25 @@ town_ruining:
     # meaning any townless player could join the town and reclaim it.
     # You should expect this to be abused by players who will reclaim a town to prevent someone else reclaiming it.
     ruins_become_open: 'false'
+  
+  
+############################################################
+# +------------------------------------------------------+ #
+# |                  ASCII MAP SYMBOLS                   | #
+# |                                                      | #
+# | Used in the ascii maps for symbols not determined by | #
+# | townblocktype. See Town Block Types section for more | #
+# | options.                                             | #
+# +------------------------------------------------------+ #
+############################################################
+  
+ascii_map_symbols:
+  
+  # The character used for the home symbol.
+  home: H
+  
+  # The character used for plots which are forsale.
+  forsale: $
+  
+  # The character used for plots which are unclaimed.
+  wilderness: '-'

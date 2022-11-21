@@ -38,7 +38,6 @@ nomad:
 - towny.command.towny.war
 - towny.command.town.online
 - towny.command.town.here
-- towny.command.town.new
 - towny.command.town.join
 - towny.command.town.list.*
 - towny.command.town.ranklist
@@ -84,7 +83,6 @@ towns:
   - towny.command.town.*
   - towny.command.plot.*
   - towny.claimed.owntown.*
-  - towny.command.nation.new
   - towny.outlaw.jailer
   - towny.command.nation.join
   - towny.command.nation.leave
